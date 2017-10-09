@@ -1,11 +1,6 @@
 <?php session_start();
 require 'inc/head.php';
 
-if (!$_SESSION)
-{
-    header('location: login.php');
-}
-
 
 if($_GET['add_to_cart']){
 
