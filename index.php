@@ -1,8 +1,10 @@
-<?php session_start();
+<?php
+
+error_reporting(E_ALL);
+
 require 'inc/head.php';
 
-
-if($_GET['add_to_cart']){
+if(isset($_GET['add_to_cart'])){
 
     switch ($_GET['add_to_cart']) {
         case 46:
@@ -20,8 +22,16 @@ if($_GET['add_to_cart']){
             break;
     }
 
-    setcookie('product', serialize($productInfo), time() + 365*24*3600, null, null, false, true);
+    $cookie_data = array();
 
+    if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart']))
+    {
+        $cookie_data = (array)json_decode($_COOKIE['cart']);
+    }
+
+    array_push($cookie_data, $productInfo);
+
+    setcookie('cart', json_encode($cookie_data), time() + 365*24*3600, null, null, false, true);
 }
 
 ?>

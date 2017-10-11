@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 
 require 'inc/head.php';
 
@@ -6,7 +6,7 @@ $errorMessage = '';
 
 if ($_POST) {
 
-    if (empty($_POST['loginname'])) {
+    if (isset($_POST['loginname']) && empty($_POST['loginname'])) {
         $errorMessage = 'Please, do chose a name';
     } else {
         $_SESSION = $_POST;
@@ -14,7 +14,7 @@ if ($_POST) {
     }
 }
 
-if ($_SESSION['loginname']) {
+if (isset($_SESSION['loginname'])) {
     header('Location: index.php');
 }
 
